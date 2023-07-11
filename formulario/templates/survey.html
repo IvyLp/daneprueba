@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}::Pregunta No {{ question_id }}::{% endblock %}
+
+{% block menu %}
+    <ul>
+        {% for q in question_list %}
+            {% if q.id == question_id %}
+                <li><a href="/survey/{{ q.id }}/q/{{user_id}}/u" class="active">{{q.no}} {{ q.question }}</a></li>
+            {% else %}
+                <li><a href="/survey/{{ q.id }}/q/{{user_id}}/u">{{q.no}} {{ q.question }}</a></li>
+            {% endif%}
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="card card-form">
+        <form data-type="{{question_selected.type}}" data-user="{{user_id}}" data-question="{{question_id}}" data-options="{{responseOptionNumber}}" class="p-3">
+            {% csrf_token %}
+            <h5 class="card-title">Q{{ question_selected.no}} - {{ question_selected.question }}</h5>
+            <div class="mb-3">
+                <p class="instruction">(
+                    {% if question_selected.instruction == '1' %}
+                        Escriba una respuesta.
+                    {% elif question_selected.instruction == '2' %}
+                        Por favor seleccione solo una opción
+                    {% elif question_selected.instruction == '3'  %}
+                        Puede seleccionar más de una opción
+                    {% endif %}
+                    )
+                </p>
+            </div>
+            <div class="mb-3">
+                {% if question_selected.isRequired %}
+                    <span class="requireField" ></span>
+                {% endif %}
+                {% if question_selected.isInteger %}
+                    <span class="requireInteger"></span>
+                {% endif %}
+                {% if question_selected.type == '1' %}
+                    <input type="text" class="form-control" id="defaulField" value={{responseField}}>
+                {% elif question_selected.type == '2' %}
+                    {% for opt in options_list %}
+                         <input class="form-check-input" type="radio" name="choice{{opt.question}}" id="choice{{ forloop.counter }}" value="{{ opt.id }}">
+                        <label for="choice{{ forloop.counter }}">{{ opt.option }}</label>
+                        <br/>
+                    {% endfor %}
+                {% elif question_selected.type == '3'  %}
+                    {% for opt in options_list %}
+                        <input class="form-check-input" type="checkbox" name="choice" id="choice{{ forloop.counter }}" value="{{ opt.id }}">
+                        <label for="choice{{ forloop.counter }}">{{ opt.option }}</label>
+                        <br/>
+                    {% endfor %}
+                {% endif %} 
+            </div>
+            <div class="mb-3 field-other">
+                <label for="otherField" class="form-label">¿Cúal?</label>
+                <input type="text" class="form-control" id="otherField">
+            </div>
+            
+            <button id="BtnSurvey" class="btn btn-primary">Enviar</button>
+        </form>
+        <div id="AlertWarning" class="alert alert-warning d-flex align-items-center" role="alert"></div>
+    </div>
+    {% load static %}
+    <script src="{% static 'survey.js' %}"></script>
+{% endblock %}

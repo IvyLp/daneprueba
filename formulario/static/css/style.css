@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+body{
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.container-menu {
+    position: relative;
+    width: 30%;
+    height: 100%;
+    padding: 2rem 0.5rem;
+    box-sizing: border-box;
+    background-color: rgb(37, 31, 44);
+}
+
+.container-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container-menu ul li{
+    margin: 0.5rem 0;
+}
+
+.container-menu ul li a{
+    display: block;
+    width: 100%;
+    background: #ffffff24;
+    text-decoration: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.container-menu ul li a.active{
+    background: #22910f99;
+    font-weight: bold;
+}
+.container-main {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f5;
+}
+
+.container-main .card-title{
+    color: #252323;
+}
+
+.container-main .card-form{
+    width: 90%;
+    max-width: 768px;
+}
+
+.alert {
+    visibility: hidden;
+}
+
+.alert.active {
+    visibility: visible;
+}
+
+.field-other{
+    display: none;
+}
+
+.instruction{
+    color: rgb(102, 102, 36);
+}

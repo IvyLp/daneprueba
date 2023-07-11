@@ -1,0 +1,42 @@
+{% extends "user/base.html" %}
+{% block title %}::Registro de Usuario::{% endblock %}
+
+{% block content %}
+    <div class="card card-form">
+        <div class="card-body">
+            <h5 class="card-title">Formulario Registro</h5>
+            <form>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="firstNameField" class="form-label">Nombres </label>
+                    <input type="text" class="form-control" id="firstNameField">
+                </div>
+                <div class="mb-3">
+                    <label for="lastNameField" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="lastNameField">
+                </div>
+                <div class="mb-3">
+                    <label for="emailField" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="emailField">
+                </div>
+                <div class="mb-3">
+                    <label for="userField" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="userField">
+                </div>
+                <div class="mb-3">
+                    <label for="passwordField" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="passwordField">
+                </div>
+                <div class="mb-3">
+                    <label for="repeatPasswordField" class="form-label">Repeat Password</label>
+                    <input type="password" class="form-control" id="repeatPasswordField">
+                </div>
+            
+                <button id="BtnEnviar" type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            <div id="AlertWarning" class="alert alert-warning d-flex align-items-center" role="alert"></div>
+        </div>
+    </div>
+    {% load static %}
+    <script src="{% static 'user/register.js' %}"></script>
+{% endblock %}
